@@ -10,7 +10,15 @@ public class Main {
 //        demo2();
 //        demo3();
 //        demo4();
-        demo5();
+//        demo5();
+
+        var str1 = "xxs";
+        var str2 = "xxs";
+        var str3 = new String("xxs");
+
+        System.out.println(str1 == str2);
+        System.out.println(str1 == str3);
+
     }
 
 
