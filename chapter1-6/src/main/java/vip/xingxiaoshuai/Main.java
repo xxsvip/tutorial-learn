@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-//        demo1();
+        demo1();
 //        Character b = demo2().orElse('b');
 //        System.out.println(b);
 

@@ -1,0 +1,65 @@
+### 测试get
+GET {{base}}/get
+
+
+### 测试post
+POST {{base}}/post
+
+
+### 测试自带变量
+GET {{base}}/get2?email={{$random.email}}
+
+### 测试post json
+POST {{base}}/post2
+Content-Type: application/json
+
+{
+    "email": "{{$random.email}}",
+    "password": "{{$random.alphabetic(10)}}"
+}
+
+
+### 测试 javascript 脚本
+POST {{base}}/post2
+Content-Type: application/json
+
+{
+    "email": "{{$random.email}}",
+    "password": "{{$random.alphabetic(10)}}"
+}
+
+> {%
+    client.log(response.body.email);
+    client.log(response.body.password);
+
+   client.test("测试是否返回200", function() {
+       return response.status === 200;
+   });
+
+%}
+
+### 测试request
+< {%
+   request.variables.set("email", "xxs@xxs.com");
+%}
+GET {{base}}/get3?email={{email}}
+
+### 测试 一个请求结果被另一个请求所使用
+POST {{base}}/post2
+Content-Type: application/json
+
+{
+    "email": "{{$random.email}}",
+    "password": "{{$random.alphabetic(10)}}"
+}
+
+> {%
+    client.global.set("auth",response.body.password);
+
+%}
+
+###
+GET {{base}}/get3?email={{auth}}
+
+
+
